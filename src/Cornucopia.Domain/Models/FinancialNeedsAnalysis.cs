@@ -8,15 +8,27 @@ namespace Cornucopia.Domain.Models
             string clientName,
             int age,
             int targetRetirementAge,
-            int monthlyLivingExpenseAmount)
+            decimal monthlyLivingExpenseAmount,
+            decimal inflationRate = 0.0m)
         {
             ClientName = clientName;
             Age = age;
             TargetRetirementAge = targetRetirementAge;
             MonthlyLivingExpenseAmount = monthlyLivingExpenseAmount;
+            InflationRate = inflationRate;
 
-            TargetRetirementFundAmount = MonthlyLivingExpenseAmount * 12 * 10;
+            AnnualLivingExpenseAmount = MonthlyLivingExpenseAmount * 12;
+
+            TargetRetirementFundAmount = AnnualLivingExpenseAmount;
+            var lastYearLivingExpenseAmount = AnnualLivingExpenseAmount;
+            var yearsUntilRetirement = targetRetirementAge - age + 10;
+            for (var i = 1; i < yearsUntilRetirement; i++)
+            {
+                lastYearLivingExpenseAmount = Math.Round(lastYearLivingExpenseAmount * (1 + inflationRate), 2);
+                TargetRetirementFundAmount += lastYearLivingExpenseAmount;
+            }
         }
+
 
         public string ClientName { get; }
 
@@ -24,7 +36,11 @@ namespace Cornucopia.Domain.Models
 
         public int TargetRetirementAge { get; }
 
+        public decimal AnnualLivingExpenseAmount { get; }
+
         public decimal MonthlyLivingExpenseAmount { get; }
+
+        public decimal InflationRate { get; }
 
         public decimal TargetRetirementFundAmount { get; }
     }
