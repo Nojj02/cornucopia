@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  cornucopia.financialplanning:
+    image: cornucopia.financialplanning
+    build:
+      context: ./Cornucopia.FinancialPlanning
+      dockerfile: Dockerfile

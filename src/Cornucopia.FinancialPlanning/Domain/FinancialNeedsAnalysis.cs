@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cornucopia.Domain.Models
+namespace Cornucopia.FinancialPlanning.Domain.Domain
 {
     public class FinancialNeedsAnalysis
     {

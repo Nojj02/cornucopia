@@ -1,7 +1,7 @@
-﻿using Cornucopia.Domain.Models;
+﻿using Cornucopia.FinancialPlanning.Domain.Domain;
 using Xunit;
 
-namespace Cornucopia.Domain.Tests.Models
+namespace Cornucopia.FinancialPlanning.Domain.Tests.Domain
 {
     public class FinancialNeedsAnalysisTests
     {
