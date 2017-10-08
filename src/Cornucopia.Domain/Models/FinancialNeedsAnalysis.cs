@@ -1,4 +1,6 @@
-﻿namespace Cornucopia.Domain.Models
+﻿using System;
+
+namespace Cornucopia.Domain.Models
 {
     public class FinancialNeedsAnalysis
     {
@@ -6,14 +8,14 @@
             string clientName,
             int age,
             int targetRetirementAge,
-            int currentLivingExpenses)
+            int monthlyLivingExpenseAmount)
         {
             ClientName = clientName;
             Age = age;
             TargetRetirementAge = targetRetirementAge;
-            CurrentLivingExpenses = currentLivingExpenses;
+            MonthlyLivingExpenseAmount = monthlyLivingExpenseAmount;
 
-            TargetRetirementFund = CurrentLivingExpenses * 10;
+            TargetRetirementFundAmount = MonthlyLivingExpenseAmount * 12 * 10;
         }
 
         public string ClientName { get; }
@@ -22,8 +24,8 @@
 
         public int TargetRetirementAge { get; }
 
-        public decimal CurrentLivingExpenses { get; }
+        public decimal MonthlyLivingExpenseAmount { get; }
 
-        public decimal TargetRetirementFund { get; }
+        public decimal TargetRetirementFundAmount { get; }
     }
 }

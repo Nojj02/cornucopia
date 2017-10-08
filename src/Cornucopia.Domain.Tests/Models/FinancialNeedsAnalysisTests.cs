@@ -8,16 +8,16 @@ namespace Cornucopia.Domain.Tests.Models
         public class NewTests : FinancialNeedsAnalysisTests
         {
             [Fact]
-            public void TargetRetirementFundIsCurrentLivingExpensesMultipliedByTenYears()
+            public void TargetRetirementFundIsAnnualLivingExpensesMultipliedByTenYears()
             {
                 var financialNeedsAnalysis =
                     new FinancialNeedsAnalysis(
                         clientName: "Juan De La Cruz",
                         age: 25,
                         targetRetirementAge: 25,
-                        currentLivingExpenses: 10500);
+                        monthlyLivingExpenseAmount: 20_000);
 
-                Assert.Equal(105000, financialNeedsAnalysis.TargetRetirementFund);
+                Assert.Equal(2_400_000, financialNeedsAnalysis.TargetRetirementFundAmount);
             }
         }
     }
