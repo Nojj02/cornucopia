@@ -11,6 +11,7 @@ namespace Cornucopia.FinancialPlanning.Domain.Domain
             decimal monthlyLivingExpenseAmount,
             decimal inflationRate = 0.0m)
         {
+            Id = Guid.NewGuid();
             ClientName = clientName;
             Age = age;
             TargetRetirementAge = targetRetirementAge;
@@ -28,7 +29,8 @@ namespace Cornucopia.FinancialPlanning.Domain.Domain
                 TargetRetirementFundAmount += lastYearLivingExpenseAmount;
             }
         }
-
+        
+        public Guid Id { get; set; }
 
         public string ClientName { get; }
 
