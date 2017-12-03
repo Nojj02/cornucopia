@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: cornucopia-postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=Asdf1234
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d
+
+  cornucopia.financialplanning:
+    depends_on:
+      - postgres
+    build:
+      context: ./src/Cornucopia.FinancialPlanning
+      dockerfile: Dockerfile
+    ports:
+      - "80"

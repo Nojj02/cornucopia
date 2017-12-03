@@ -1,5 +1,5 @@
 ﻿using System;
-using Cornucopia.FinancialPlanning.Domain.Domain;
+using Cornucopia.FinancialPlanning.Domain;
 
 namespace Cornucopia.FinancialPlanning.Controllers.ViewModels
 {

@@ -1,5 +1,4 @@
-﻿using Cornucopia.FinancialPlanning.Domain.Domain;
-using Xunit;
+﻿using Xunit;
 
 namespace Cornucopia.FinancialPlanning.Domain.Tests.Domain
 {
