@@ -1,4 +1,5 @@
 # Cornucopia
-Cornucopia is more an exercise in domain modeling than anything. The domain I went with was Financial Planning in the context of the Insurance industry. More details on the domain will be dumped on the [wiki](https://github.com/nojj02/cornucopia/wiki).
+Cornucopia is probably going to end up as some sort of financial planning app. To be continued...
+
 # License
 This project is licensed under the terms of the MIT license.
