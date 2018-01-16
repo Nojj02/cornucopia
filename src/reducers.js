@@ -6,7 +6,7 @@ import {
 
 const appReducer = (state = {
     purchaseAmount : 0,
-    wishItems : [{
+    wishlist : [{
         quantity : 0,
         cost : 200,
         itemName : 'Coffee'
@@ -22,13 +22,13 @@ const appReducer = (state = {
   }, action) => {
     switch (action.type) {
       case PURCHASEAMOUNT_CHANGE:
-        const wishItems = 
-            state.wishItems.map(x => Object.assign({}, x, {
-                quantity : action.value / x.cost
+        const wishlist = 
+            state.wishlist.map(x => Object.assign({}, x, {
+                quantity : Math.round(action.value / x.cost, 2)
             }));
         return Object.assign({}, state, {
           purchaseAmount : action.value,
-          wishItems : wishItems
+          wishlist : wishlist
         });
       default:
         return state

@@ -18,7 +18,7 @@ class App extends Component {
 
   render() {
     const wishlist = 
-      this.props.wishItems.map(x => {
+      this.props.wishlist.map(x => {
         return (
           <p>
             <label>{x.quantity} {x.itemName}</label>
@@ -56,7 +56,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     purchaseAmount: state.purchaseAmount,
-    wishItems : state.wishItems
+    wishlist : state.wishlist
   }
 }
 
