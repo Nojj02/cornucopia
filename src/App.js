@@ -17,6 +17,14 @@ class App extends Component {
   }
 
   render() {
+    const wishlist = 
+      this.props.wishItems.map(x => {
+        return (
+          <p>
+            <label>{x.quantity} {x.itemName}</label>
+          </p>)
+      });
+
     return (
       <div className="App">
         <header className="App-header">
@@ -27,11 +35,9 @@ class App extends Component {
           How much is it?
         </p>
         <p>
-          <input type="text" onChange={this.props.onPurchaseAmountChange.bind(this)} />
+          <input type="text" onChange={this.props.onPurchaseAmountChange.bind(this)} value={this.props.purchaseAmount} />
         </p>
-        <p>
-          <label>{this.props.purchaseAmount / 200} {this.state.unitOfMeasure}</label>
-          </p>
+        {wishlist}
       </div>
     );
   }
@@ -39,8 +45,8 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onPurchaseAmountChange : event => {
-      let parsedValue = event.target.value ? parseFloat(event.target.value) : 0;
+    onPurchaseAmountChange: event => {
+      let parsedValue = event.target.value ? Math.round(parseFloat(event.target.value), 2) : 0;
 
       dispatch(purchaseAmountChange(parsedValue))
     }
@@ -49,7 +55,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    purchaseAmount: state.purchaseAmount
+    purchaseAmount: state.purchaseAmount,
+    wishItems : state.wishItems
   }
 }
 
