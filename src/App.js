@@ -3,6 +3,11 @@ import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
 
+import {
+  PURCHASEAMOUNT_CHANGE,
+  purchaseAmountChange
+} from './actions.js';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -16,13 +21,12 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">How much is it worth?</h1>
         </header>
         <p className="App-intro">
-          How much is it worth to you?
+          How much is it?
         </p>
         <p>
-          <label>What are you trying to buy?</label>
           <input type="text" onChange={this.props.onPurchaseAmountChange.bind(this)} />
         </p>
         <p>
@@ -36,10 +40,9 @@ class App extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     onPurchaseAmountChange : event => {
-      dispatch({
-        type : 'PURCHASEAMOUNT_CHANGE',
-        value : parseFloat(event.target.value)
-      })
+      let parsedValue = event.target.value ? parseFloat(event.target.value) : 0;
+
+      dispatch(purchaseAmountChange(parsedValue))
     }
   }
 }

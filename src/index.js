@@ -4,21 +4,10 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-import { Provider } from 'react-redux'
-import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-const appReducer = (state = {
-    purchaseAmount : 0
-  }, action) => {
-    switch (action.type) {
-      case 'PURCHASEAMOUNT_CHANGE':
-        return Object.assign({}, state, {
-          purchaseAmount : action.value
-        });
-      default:
-        return state
-    }
-  }
+import appReducer from './reducers.js';
 
 const store = createStore(appReducer);
 
