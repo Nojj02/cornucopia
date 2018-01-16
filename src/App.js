@@ -8,6 +8,7 @@ import {
   purchaseAmountChange
 } from './actions.js';
 
+import WishForm from './WishForm';
 import Wishlist from './Wishlist';
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
           <input type="text" onChange={this.props.onPurchaseAmountChange.bind(this)} value={this.props.purchaseAmount} />
         </p>
         <Wishlist />
+        <WishForm />
       </div>
     );
   }
@@ -49,8 +51,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    purchaseAmount: state.purchaseAmount,
-    wishlist : state.wishlist
+    purchaseAmount: state.app.purchaseAmount,
+    wishlist : state.app.wishlist
   }
 }
 

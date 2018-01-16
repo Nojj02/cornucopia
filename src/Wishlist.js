@@ -19,7 +19,7 @@ const Wishlist = props => {
 
 const mapStateToProps = state => {
     return {
-        wishlist: state.wishlist
+        wishlist: state.app.wishlist
     }
 }
 
