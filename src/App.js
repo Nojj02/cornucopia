@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      cost: 0,
       unitOfMeasure: 'Starbucks coffees'
     }
-  }
-
-  handleChange(event) {
-    const cost = parseFloat(event.target.value);
-    this.setState({
-      cost: cost / 200
-    });
   }
 
   render() {
@@ -30,14 +23,34 @@ class App extends Component {
         </p>
         <p>
           <label>What are you trying to buy?</label>
-          <input type="text" onChange={this.handleChange.bind(this)} />
+          <input type="text" onChange={this.props.onPurchaseAmountChange.bind(this)} />
         </p>
         <p>
-          <label>{this.state.cost} {this.state.unitOfMeasure}</label>
+          <label>{this.props.purchaseAmount / 200} {this.state.unitOfMeasure}</label>
           </p>
       </div>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    onPurchaseAmountChange : event => {
+      dispatch({
+        type : 'PURCHASEAMOUNT_CHANGE',
+        value : parseFloat(event.target.value)
+      })
+    }
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    purchaseAmount: state.purchaseAmount
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
