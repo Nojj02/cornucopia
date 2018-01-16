@@ -8,6 +8,8 @@ import {
   purchaseAmountChange
 } from './actions.js';
 
+import Wishlist from './Wishlist';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -17,14 +19,6 @@ class App extends Component {
   }
 
   render() {
-    const wishlist = 
-      this.props.wishlist.map(x => {
-        return (
-          <p>
-            <label>{x.quantity} {x.itemNameDisplay}</label>
-          </p>)
-      });
-
     return (
       <div className="App">
         <header className="App-header">
@@ -37,7 +31,7 @@ class App extends Component {
         <p>
           <input type="text" onChange={this.props.onPurchaseAmountChange.bind(this)} value={this.props.purchaseAmount} />
         </p>
-        {wishlist}
+        <Wishlist />
       </div>
     );
   }
