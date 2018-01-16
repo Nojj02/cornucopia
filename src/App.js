@@ -21,7 +21,7 @@ class App extends Component {
       this.props.wishlist.map(x => {
         return (
           <p>
-            <label>{x.quantity} {x.itemName}</label>
+            <label>{x.quantity} {x.itemNameDisplay}</label>
           </p>)
       });
 
@@ -46,7 +46,7 @@ class App extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     onPurchaseAmountChange: event => {
-      let parsedValue = event.target.value ? Math.round(parseFloat(event.target.value), 2) : 0;
+      let parsedValue = event.target.value ? parseInt(event.target.value) : 0;
 
       dispatch(purchaseAmountChange(parsedValue))
     }
