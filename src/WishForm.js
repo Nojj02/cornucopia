@@ -16,7 +16,7 @@ const WishForm = props => {
                 </p>
                 <p>
                     <label>Cost</label>
-                    <input type="text" value={props.cost} onChange={props.onFieldChange.bind(this, 'cost')} />
+                    <input type="number" value={props.cost} onChange={props.onFieldChange.bind(this, 'cost')} />
                 </p>
                 <button type="submit" onClick={props.onWishFormSubmit.bind(this, props)}>Add</button>
             </form>
@@ -26,6 +26,7 @@ const WishForm = props => {
 
 const mapStateToProps = state => {
     return {
+        cost : state.wishForm.cost,
         itemName : state.wishForm.itemName
     }
 }
@@ -37,6 +38,7 @@ const mapDispatchToProps = dispatch => {
         },
         onWishFormSubmit : (form, event) => {
             event.preventDefault();
+            console.log(form)
             dispatch(wishFormSubmit(form))
         }
     }

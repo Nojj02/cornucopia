@@ -8,19 +8,7 @@ import {
 
 const app = (state = {
     purchaseAmount: 0,
-    wishlist: [{
-        quantity: 0,
-        cost: 200,
-        itemName: 'Coffee'
-    }, {
-        quantity: 0,
-        cost: 60,
-        itemName: 'Lunch'
-    }, {
-        quantity: 0,
-        cost: 15000,
-        itemName: 'Switch'
-    }]
+    wishlist: []
 }, action) => {
     switch (action.type) {
         case PURCHASEAMOUNT_CHANGE: {

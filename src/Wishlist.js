@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import pluralize from 'pluralize';
 
 const Wishlist = props => {
+    let key = 0;
     const wishlist =
         props.wishlist.map(x => {
             return (
-                <p>
+                <p key={key++}>
                     <label>{x.quantity} {pluralize(x.itemName, x.quantity)}</label>
                 </p>)
         });
