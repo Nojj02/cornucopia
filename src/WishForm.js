@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {
-    itemNameChange, 
+    wishFormFieldChange, 
     wishFormSubmit 
 } from './actions';
 
@@ -12,7 +12,11 @@ const WishForm = props => {
             <form>
                 <p>
                     <label>Add new Item</label>
-                    <input type="text" value={props.itemName} onChange={props.onItemNameChange.bind(this)} />
+                    <input type="text" value={props.itemName} onChange={props.onFieldChange.bind(this, 'itemName')} />
+                </p>
+                <p>
+                    <label>Cost</label>
+                    <input type="text" value={props.cost} onChange={props.onFieldChange.bind(this, 'cost')} />
                 </p>
                 <button type="submit" onClick={props.onWishFormSubmit.bind(this, props)}>Add</button>
             </form>
@@ -28,8 +32,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onItemNameChange : event => {
-            dispatch(itemNameChange(event.target.value))
+        onFieldChange : (fieldName, event) => {
+            dispatch(wishFormFieldChange(fieldName, event.target.value))
         },
         onWishFormSubmit : (form, event) => {
             event.preventDefault();

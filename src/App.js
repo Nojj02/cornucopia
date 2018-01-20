@@ -27,10 +27,16 @@ class App extends Component {
           <h1 className="App-title">How much is it worth?</h1>
         </header>
         <p className="App-intro">
+          What are you buying?
+        </p>
+        <p>
+          <input type="text" />
+        </p>
+        <p className="App-intro">
           How much is it?
         </p>
         <p>
-          <input type="text" onChange={this.props.onPurchaseAmountChange.bind(this)} value={this.props.purchaseAmount} />
+          <input type="number" onChange={this.props.onPurchaseAmountChange.bind(this)} value={this.props.purchaseAmount} />
         </p>
         <Wishlist />
         <WishForm />
@@ -42,7 +48,7 @@ class App extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     onPurchaseAmountChange: event => {
-      let parsedValue = event.target.value ? parseInt(event.target.value) : 0;
+      let parsedValue = event.target.value;
 
       dispatch(purchaseAmountChange(parsedValue))
     }

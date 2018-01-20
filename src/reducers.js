@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import pluralize from 'pluralize';
 import {
     PURCHASEAMOUNT_CHANGE,
-    WISHFORM_ITEMNAMECHANGE,
+    WISHFORM_FIELDCHANGE,
     WISHFORM_SUBMIT
 } from './actions.js';
 
@@ -11,18 +11,15 @@ const app = (state = {
     wishlist: [{
         quantity: 0,
         cost: 200,
-        itemName: 'Coffee',
-        itemNameDisplay: 'Coffees'
+        itemName: 'Coffee'
     }, {
         quantity: 0,
         cost: 60,
-        itemName: 'Lunch',
-        itemNameDisplay: 'Lunches'
+        itemName: 'Lunch'
     }, {
         quantity: 0,
         cost: 15000,
-        itemName: 'Switch',
-        itemNameDisplay: 'Switches'
+        itemName: 'Switch'
     }]
 }, action) => {
     switch (action.type) {
@@ -31,8 +28,7 @@ const app = (state = {
                 state.wishlist.map(x => {
                     const quantity = Math.floor(action.value / x.cost, 2);
                     return Object.assign({}, x, {
-                        quantity: quantity,
-                        itemNameDisplay: pluralize(x.itemName, quantity)
+                        quantity: quantity
                     });
                 });
             return Object.assign({}, state, {
@@ -45,9 +41,8 @@ const app = (state = {
             const wishlist =
                 state.wishlist.concat([{
                     quantity: quantity,
-                    cost: 100,
-                    itemName: action.form.itemName,
-                    itemNameDisplay: action.form.itemName
+                    cost: action.form.cost,
+                    itemName: action.form.itemName
                 }]);
             return Object.assign({}, state, {
                 wishlist: wishlist
@@ -59,15 +54,17 @@ const app = (state = {
 }
 
 const wishForm = (state = {
-    itemName: ''
+    itemName : '',
+    cost : 0
 }, action) => {
     switch (action.type) {
-        case WISHFORM_ITEMNAMECHANGE:
-            return Object.assign({}, state, {
-                itemName: action.value
-            })
+        case WISHFORM_FIELDCHANGE:
+            const fieldChange = {};
+            fieldChange[action.fieldName] = action.value;
+            return Object.assign({}, state, fieldChange)
         case WISHFORM_SUBMIT:
             return Object.assign({}, state, {
+                cost : 0,
                 itemName: ''
             });
         default:
