@@ -1,22 +1,35 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import * as React from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 
+import { Dispatch } from 'redux';
+
 import {
-  PURCHASEAMOUNT_CHANGE,
   purchaseAmountChange
 } from './actions.js';
 
 import WishForm from './WishForm';
 import Wishlist from './Wishlist';
 
-class App extends Component {
-  constructor(props) {
+const logo = require('./logo.svg');
+
+interface DispatchProps {
+  onPurchaseAmountChange : React.ReactEventHandler<HTMLInputElement>;
+}
+
+interface StateProps {
+  purchaseAmount: number;
+}
+
+interface Props extends DispatchProps, StateProps {
+}
+
+class App extends React.Component<Props> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       unitOfMeasure: 'Starbucks coffees'
-    }
+    };
   }
 
   render() {
@@ -36,7 +49,7 @@ class App extends Component {
           How much is it?
         </p>
         <p>
-          <input type="number" onChange={this.props.onPurchaseAmountChange.bind(this)} value={this.props.purchaseAmount} />
+          <input type="number" onChange={this.props.onPurchaseAmountChange} value={this.props.purchaseAmount} />
         </p>
         <Wishlist />
         <WishForm />
@@ -45,22 +58,21 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch : Dispatch<any>) : DispatchProps => {
   return {
     onPurchaseAmountChange: event => {
-      let parsedValue = event.target.value;
+      let parsedValue = event.currentTarget.value;
 
-      dispatch(purchaseAmountChange(parsedValue))
+      dispatch(purchaseAmountChange(parsedValue));
     }
-  }
-}
+  };
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = (state : any) : StateProps => {
   return {
-    purchaseAmount: state.app.purchaseAmount,
-    wishlist : state.app.wishlist
-  }
-}
+    purchaseAmount: state.app.purchaseAmount
+  };
+};
 
 export default connect(
   mapStateToProps,
