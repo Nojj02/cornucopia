@@ -3,7 +3,17 @@ import { connect } from 'react-redux';
 
 import pluralize from 'pluralize';
 
-const Wishlist = (props : any) => {
+interface Props {
+    wishlist : WishlistItem[];
+}
+
+interface WishlistItem {
+    quantity: number;
+    cost: number;
+    itemName : string;
+}
+
+const Wishlist : React.SFC<Props> = props => {
     let key = 0;
     const wishlist =
         props.wishlist.map((x : any): JSX.Element => {
