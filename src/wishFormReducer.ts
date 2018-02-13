@@ -10,7 +10,7 @@ export type State = {
 
 const wishFormReducer = (
     state : State = {
-        itemName : null,
+        itemName : '',
         cost : 0
     },
     action) : State => {

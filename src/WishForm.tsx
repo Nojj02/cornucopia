@@ -10,7 +10,7 @@ import {
 interface DispatchProps {
     onItemNameChange : React.ReactEventHandler<HTMLInputElement>;
     onCostChange : React.ReactEventHandler<HTMLInputElement>;
-    onWishFormSubmit : React.ReactEventHandler<HTMLButtonElement>;
+    onWishFormSubmit(event : React.SyntheticEvent<HTMLButtonElement>, props : any) : void;
 }
 
 interface StateProps {
@@ -33,7 +33,7 @@ const WishForm = (props : Props) => {
                     <label>Cost</label>
                     <input type="number" value={props.cost} onChange={props.onCostChange} />
                 </p>
-                <button type="submit" onClick={props.onWishFormSubmit}>Add</button>
+                <button type="submit" onClick={event => props.onWishFormSubmit(event, props)}>Add</button>
             </form>
         </div>
     );
@@ -54,10 +54,9 @@ const mapDispatchToProps = (dispatch : Dispatch<any>) : DispatchProps => {
         onItemNameChange : (event) => {
             dispatch(wishFormFieldChange('itemName', event.currentTarget.value));
         },
-        onWishFormSubmit : (event) => {
+        onWishFormSubmit : (event, props) => {
             event.preventDefault();
-            dispatch(wishFormSubmit(null));
-            // dispatch(wishFormSubmit(form))
+            dispatch(wishFormSubmit(props));
         }
     };
 };
