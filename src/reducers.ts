@@ -1,9 +1,16 @@
-import { combineReducers } from 'redux';
+import * as Redux from 'redux';
 
 import appReducer from './appReducer';
-import wishFormReducer from './wishFormReducer';
+import { WishFormState, WishFormReducer } from './wishFormReducer';
 
-export default combineReducers({
+export type RootState = {
+    app : any;
+    wishForm : WishFormState;
+};
+
+const combinedReducers : Redux.ReducersMapObject = {
     app: appReducer,
-    wishForm: wishFormReducer
-});
+    wishForm: WishFormReducer
+};
+
+export default Redux.combineReducers<RootState>(combinedReducers);

@@ -1,19 +1,21 @@
+import * as Redux from 'redux';
+
 import {
     WISHFORM_FIELDCHANGE,
     WISHFORM_SUBMIT
 } from './actions.js';
 
-export type State = {
-    readonly itemName : string | null;
+export type WishFormState = {
+    readonly itemName : string;
     readonly cost : number | 0;
 };
 
-const wishFormReducer = (
-    state : State = {
+const WishFormReducer : Redux.Reducer<WishFormState> = (
+    state : WishFormState = {
         itemName : '',
         cost : 0
     },
-    action) : State => {
+    action) : WishFormState => {
     switch (action.type) {
         case WISHFORM_FIELDCHANGE:
             const fieldChange = {};
@@ -29,4 +31,6 @@ const wishFormReducer = (
     }
 };
 
-export default wishFormReducer;
+export {
+    WishFormReducer
+};

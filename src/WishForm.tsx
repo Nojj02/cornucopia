@@ -7,6 +7,8 @@ import {
     wishFormSubmit 
 } from './actions';
 
+import { RootState } from './reducers';
+
 interface DispatchProps {
     onItemNameChange : React.ReactEventHandler<HTMLInputElement>;
     onCostChange : React.ReactEventHandler<HTMLInputElement>;
@@ -39,7 +41,7 @@ const WishForm = (props : Props) => {
     );
 };
 
-const mapStateToProps = (state : any) : StateProps => {
+const mapStateToProps = (state : RootState) : StateProps => {
     return {
         cost : state.wishForm.cost,
         itemName : state.wishForm.itemName
