@@ -3,19 +3,21 @@ import {
     WISHFORM_SUBMIT
 } from './actions.js';
 
-export type State = {
+import * as Redux from 'redux';
+
+export type AppState = {
     purchaseAmount : number;
     wishlist : WishlistItem[];
 };
 
 export type WishlistItem = {
-    readonly itemName : string | null;
+    readonly itemName : string | '';
     readonly cost : number | 0;
     readonly quantity : number | 0;
 };
 
-const appReducer = (
-    state : State = {
+const AppReducer : Redux.Reducer<AppState> = (
+    state : AppState = {
         purchaseAmount : 0,
         wishlist : []
     }, 
@@ -51,4 +53,4 @@ const appReducer = (
     }
 };
 
-export default appReducer;
+export { AppReducer };
