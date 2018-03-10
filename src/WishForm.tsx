@@ -3,62 +3,94 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import {
-    wishFormFieldChange, 
     wishFormSubmit 
 } from './actions';
 
 import { RootState } from './reducers';
 
 interface DispatchProps {
-    onItemNameChange : React.ReactEventHandler<HTMLInputElement>;
-    onCostChange : React.ReactEventHandler<HTMLInputElement>;
-    onWishFormSubmit(event : React.SyntheticEvent<HTMLButtonElement>, props : any) : void;
+    onWishFormSubmit(props : any) : void;
 }
 
-interface StateProps {
+interface RootStateProps {
+}
+
+interface Props extends DispatchProps, RootStateProps {
+}
+
+interface ComponentState {
     itemName : string;
     cost : number;
 }
 
-interface Props extends DispatchProps, StateProps {
+class WishForm extends React.Component<Props, ComponentState> {
+    constructor(props: Props) {
+        super(props);
+
+        this.state = {
+            itemName : '',
+            cost: 0
+        };
+
+        this._onItemNameChange = this._onItemNameChange.bind(this);
+        this._onCostChange = this._onCostChange.bind(this);
+        this._onFormSubmit = this._onFormSubmit.bind(this);
+    }
+
+    _onItemNameChange(event : any) {
+        this.setState({
+            itemName: event.currentTarget.value
+        });
+    }
+
+    _onCostChange(event : any) {
+        this.setState({
+            cost: event.currentTarget.value
+        });
+    }
+
+    _onFormSubmit(event: any) {
+        event.preventDefault();
+
+        this.props.onWishFormSubmit({
+            itemName: this.state.itemName,
+            cost : this.state.cost
+        });
+
+        this.setState({
+            itemName : '',
+            cost : 0
+        });
+    }
+
+    render() {
+            return (
+            <div className="wishform">
+                <form>
+                    <p>
+                        <label>Add new Item</label>
+                        <input type="text" value={this.state.itemName} onChange={this._onItemNameChange} />
+                    </p>
+                    <p>
+                        <label>Cost</label>
+                        <input type="number" value={this.state.cost} onChange={this._onCostChange} />
+                    </p>
+                    <button type="submit" onClick={this._onFormSubmit}>Add</button>
+                </form>
+            </div>
+        );
+    }
 }
 
-const WishForm = (props : Props) => {
-    return (
-        <div className="wishform">
-            <form>
-                <p>
-                    <label>Add new Item</label>
-                    <input type="text" value={props.itemName} onChange={props.onItemNameChange} />
-                </p>
-                <p>
-                    <label>Cost</label>
-                    <input type="number" value={props.cost} onChange={props.onCostChange} />
-                </p>
-                <button type="submit" onClick={event => props.onWishFormSubmit(event, props)}>Add</button>
-            </form>
-        </div>
-    );
-};
-
-const mapStateToProps = (state : RootState) : StateProps => {
+const mapStateToProps = (state : RootState) : RootStateProps => {
     return {
-        cost : state.wishForm.cost,
-        itemName : state.wishForm.itemName
     };
 };
 
 const mapDispatchToProps = (dispatch : Dispatch<any>) : DispatchProps => {
     return {
-        onCostChange : (event) => {
-            dispatch(wishFormFieldChange('cost', event.currentTarget.value));
-        },
-        onItemNameChange : (event) => {
-            dispatch(wishFormFieldChange('itemName', event.currentTarget.value));
-        },
-        onWishFormSubmit : (event, props) => {
-            event.preventDefault();
-            dispatch(wishFormSubmit(props));
+        onWishFormSubmit : (form) => {
+            dispatch(wishFormSubmit(form));
         }
     };
 };

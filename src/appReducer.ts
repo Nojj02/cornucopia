@@ -37,6 +37,10 @@ const AppReducer : Redux.Reducer<AppState> = (
             });
         }
         case WISHFORM_SUBMIT: {
+            if (!action.form.itemName) {
+                return state;
+            }
+
             const quantity = Math.floor(state.purchaseAmount / 100);
             const wishlist =
                 state.wishlist.concat([{
