@@ -1,0 +1,6 @@
+.wishlist p {
+    border: solid 1px #cdcdcd;
+    width: 20rem;
+    max-height: 7rem;
+    padding: 1rem 1rem 1.5rem 1rem;
+}
