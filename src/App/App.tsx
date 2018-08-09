@@ -6,12 +6,12 @@ import { Dispatch } from 'redux';
 
 import {
   purchaseAmountChange
-} from './actions.js';
+} from '../actions.js';
 
-import WishForm from './WishForm';
-import Wishlist from './Wishlist';
+import WishForm from '../WishForm/WishForm';
+import Wishlist from '../Wishlist/Wishlist';
 
-const logo = require('./logo.svg');
+const logo = require('../logo.svg');
 
 interface DispatchProps {
   onPurchaseAmountChange : React.ReactEventHandler<HTMLInputElement>;

@@ -1,7 +1,7 @@
 import {
     PURCHASEAMOUNT_CHANGE,
     WISHFORM_SUBMIT
-} from './actions.js';
+} from '../actions.js';
 
 import * as Redux from 'redux';
 

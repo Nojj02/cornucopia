@@ -6,9 +6,9 @@ import { Dispatch } from 'redux';
 
 import {
     wishFormSubmit 
-} from './actions';
+} from '../actions';
 
-import { RootState } from './reducers';
+import { RootState } from '../reducers';
 
 interface DispatchProps {
     onWishFormSubmit(props : any) : void;
